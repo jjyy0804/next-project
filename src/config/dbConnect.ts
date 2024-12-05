@@ -11,7 +11,7 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  const MONGODB_URI = "mongodb://127.0.0.1:27017/mini-elice";
+  const MONGODB_URI = "mongodb+srv://jjyy0804:wndud6712@cluster0.usts4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/";
 
   if (cached.conn) {
     return cached.conn;
