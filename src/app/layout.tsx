@@ -41,7 +41,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${eliceNeolli.className} antialiased`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="w-full min-h-svh py-20 px-3 flex flex-col">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
