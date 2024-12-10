@@ -1,3 +1,4 @@
+import CustomeButton from '@/components/CustomeButton';
 import { API_URL } from '@/constants';
 import React from 'react'
 import Link from '../../../../node_modules/next/link';
@@ -26,6 +27,10 @@ const RoadmapDetailpage = async ({ params: { roadmapId } }: Props) => {
     <div>
       <h1 className='text-center text-4xl mt-10 mb-3'>{roadmapsItem.title}</h1>
       <p className='text-center text-sm mb-10'>{roadmapsItem.description}</p>
+      <div className='w-full flex justify-end pb-4 gap-2'>
+        <CustomeButton title="로드맵 수정" />
+        <CustomeButton title="로드맵 삭제" />
+      </div>
       <ul className='flex items-center gap-3 flex-wrap'>
         {couresList.map((roadmapsItem: any, idx: number) => (
           <div className='flex items-center gap-3'>

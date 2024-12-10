@@ -1,5 +1,5 @@
 "use client"
-import { updateMaterial } from '@/actions/materialAction/updateMeterial';
+import { updateMaterial } from '@/actions/materialAction/updateMaterial';
 import CustomeButton from '@/components/CustomeButton';
 import React, { useState } from 'react'
 interface UpdateFormProps {

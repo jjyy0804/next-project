@@ -9,7 +9,7 @@ const getAllCourse = async () => {
 }
 const page = async () => {
   const courseList = await getAllCourse();
-  console.log(courseList);
+
   return (
     <div>
       <h1 className='text-center text-4xl my-10'>과목</h1>

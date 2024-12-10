@@ -11,7 +11,7 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  const MONGODB_URI = "mongodb+srv://jjyy0804:wndud6712@cluster0.usts4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/";
+  const MONGODB_URI = process.env.REACT_APP_DB_URL;
 
   if (cached.conn) {
     return cached.conn;

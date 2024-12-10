@@ -1,3 +1,4 @@
+import CustomeButton from '@/components/CustomeButton';
 import { API_URL } from '@/constants';
 import React from 'react'
 import Link from '../../../node_modules/next/link';
@@ -11,6 +12,14 @@ const RoadMapPage = async () => {
   return (
     <div>
       <h1 className='text-center text-4xl my-10'>로드맵</h1>
+      <div className='w-full flex justify-end pb-4'>
+        <Link href={`/roadmaps/create`}>
+          <CustomeButton
+            title="로드맵 생성"
+            containerStyles='p-3 border border-[#688dd4] rounded'
+            textStyle='text-[#688dd4]' />
+        </Link>
+      </div>
       <ul className='flex flex-col gap-3'>
         {roadmaps.map((roadmap: any, idx: number) =>
         (

@@ -10,13 +10,21 @@ interface Props {
 const getCourses = async (
   courseId: string,
 ) => {
-  const response = await fetch(`${API_URL}/api/courses/${courseId}`);
+  const response = await fetch(`${API_URL}/api/courses/${courseId}`, {
+    next: {
+      tags: ['course-data']
+    }
+  });
   return response.json();
 }
 const getLecture = async (
   courseId: string,
 ) => {
-  const response = await fetch(`${API_URL}/api/courses/${courseId}/lectures`);
+  const response = await fetch(`${API_URL}/api/courses/${courseId}/lectures`, {
+    next: {
+      tags: ['lecture-data']
+    }
+  });
   return response.json();
 }
 const Coursepage = async ({ params: { courseId } }: Props) => {
@@ -28,9 +36,26 @@ const Coursepage = async ({ params: { courseId } }: Props) => {
       <h1 className='text-center text-4xl mt-10 mb-5'>{coures.title}</h1>
       <p className='text-center text-sm mb-10'>{coures.description}</p>
       <div className='w-full flex justify-end pb-4 gap-2'>
-        <CustomeButton title='강의 생성하기' />
-        <CustomeButton title='과목 생성하기' />
-        <CustomeButton title='과목 삭제하기' />
+        <Link href={`${API_URL}/courses/${courseId}/lectures/create`}>
+          <CustomeButton
+            title="강의 생성"
+            containerStyles="p-3 border border-[#688dd4] rounded"
+            textStyle="text-[#688dd4]"
+          />
+        </Link>
+        <Link href={`${API_URL}/courses/${courseId}/update`}>
+          <CustomeButton
+            title="과목 수정"
+            containerStyles="p-3 border border-[#50d71e] rounded"
+            textStyle="text-[#50d71e]"
+          />
+        </Link>
+        <CustomeButton
+          title="과목 삭제"
+          containerStyles="p-3 border border-[#fd3f44] rounded"
+          textStyle="text-[#fd3f44]"
+
+        />
       </div>
       <ul className='flex flex-col gap-3'>
         {lectures.map((lecture: any, idx: number) => (

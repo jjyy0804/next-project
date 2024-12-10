@@ -3,8 +3,9 @@
 import React from 'react';
 import CustomeButton from '@/components/CustomeButton';
 import { useRouter } from '../../../../../../../../node_modules/next/navigation';
-import { API_URL } from '@/constants';
 import Link from '../../../../../../../../node_modules/next/link';
+import { deleteMaterial } from '@/actions/materialAction/deleteMaterial';
+
 
 interface MaterialProps {
   courseId: string,
@@ -26,27 +27,26 @@ const MaterialContent = ({ courseId, lectureId, material }: MaterialProps) => {
     router.push(`/courses/${courseId}/lectures/${lectureId}/materials/${material.id}/update`);
   };
   // 자료 삭제
-  const handleDeleteClick = async () => {
-
+  const handleDelete = async () => {
     try {
-      const response = await fetch(`${API_URL}/materials/${material.id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('삭제에 실패했습니다.');
+      if (confirm('정말 삭제하시겠습니까?')) {
+        await deleteMaterial({
+          courseId,
+          lectureId,
+          materialId: material.id,
+        });
+        alert('자료가 삭제되었습니다.');
       }
-      alert('삭제되었습니다.');
-      router.push('/lectures');
+      return;
     } catch (error) {
-      console.error(error);
-      alert('삭제에 실패했습니다.');
+      console.error('자료 삭제 실패:', error);
+      alert('자료 삭제에 실패했습니다.');
     }
-
   };
 
   return (
     <div className="w-8/12 h-full px-5 pb-28 pt-8 mx-auto border border-gray-200 rounded-md">
-      <Link href={`${API_URL}/courses/${courseId}/lectures/${lectureId}`}>
+      <Link href={`/courses/${courseId}/lectures/${lectureId}`}>
         <CustomeButton
           title="← 강의로 돌아가기"
           containerStyles="px-2 border border-[#a1a09b] rounded"
@@ -71,7 +71,7 @@ const MaterialContent = ({ courseId, lectureId, material }: MaterialProps) => {
             title="삭제"
             containerStyles="px-2 border border-[#fd3f44] rounded"
             textStyle="text-[#fd3f44]"
-            handleClick={handleDeleteClick}
+            handleClick={handleDelete}
           />
         </div>
       </div>
